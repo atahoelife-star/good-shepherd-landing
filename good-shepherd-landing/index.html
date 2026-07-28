@@ -3,119 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Good Shepherd — Deepen your faith, connect with family, and build a lasting spiritual legacy. Bible in a Year, Prayer Journal & Family Tree.">
     <title>Good Shepherd | Faith • Family • Legacy</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
-        
-        :root {
-            --navy: #0A2540;
-            --gold: #C9A227;
-        }
-        
-        body {
-            font-family: 'Inter', system_ui, sans-serif;
-        }
-        
         .heading-serif {
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: Georgia, 'Times New Roman', serif;
         }
-
         .section-header {
-            font-size: 2.25rem;
-            line-height: 2.5rem;
-            font-weight: 700;
-            color: #0A2540;
-        }
-
-        .nav-link {
-            transition: color 0.2s ease;
-        }
-        
-        .nav-link:hover {
-            color: #C9A227;
-        }
-
-        .feature-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-        }
-
-        .gold-accent {
-            color: #C9A227;
-        }
-
-        .btn-primary {
-            background-color: #0A2540;
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            background-color: #C9A227;
-            color: #0A2540;
-            transform: translateY(-1px);
-        }
-
-        .btn-store {
-            transition: all 0.3s ease;
-            border: 2px solid #0A2540;
-        }
-        
-        .btn-store:hover {
-            background-color: #0A2540;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .app-store-btn {
-            background-color: #000000;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 9999px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
-        }
-
-        .faith-bg {
-            background: linear-gradient(135deg, #0A2540 0%, #1a3a5c 100%);
-        }
-
-        .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            line-height: 1;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
         }
-
         .testimonial-card {
             transition: all 0.3s ease;
         }
-}
-
-        .testimonial-card {
-            transition: all 0.3s ease;
+        /* Force text to be visible */
+        .testimonial-card p,
+        .testimonial-card .font-semibold,
+        .testimonial-card .text-sm,
+        .feature-card h3,
+        .feature-card p,
+        #pricing .font-semibold,
+        #pricing .text-5xl,
+        #pricing .text-sm,
+        #pricing .text-xs,
+        #faq summary,
+        #faq p {
+            color: #0A2540 !important;
         }
     </style>
 </head>
 <body class="bg-[#FDF8F0] text-[#0A2540]">
-    <!-- Navbar -->
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-         
-    </style>
-</head>
-<body class="bg-[#FDF8F0] text-[#0A2540]">
+
     <!-- Navbar -->
     <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6">
@@ -132,22 +53,14 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
-                    <a href="#features" class="nav-link text-[#0A2540] hover:text-[#C9A227]">Features</a>
-                    <a href="#how" class="nav-link text-[#0A2540] hover:text-[#C9A227]">How it Works</a>
-                    <a href="#pricing" class="nav-link text-[#0A2540] hover:text-[#C9A227]">Pricing</a>
-                    <a href="#faq" class="nav-link text-[#0A2540] hover:text-[#C9A227]">FAQ</a>
-                </div>
-
-                <div class="hidden md:block">
-                    <a href="#download" 
-                       class="px-6 py-2.5 rounded-3xl bg-[#0A2540] hover:bg-[#C9A227] hover:text-[#0A2540] text-white text-sm font-semibold transition-colors">
-                        Download App
-                    </a>
+                    <a href="#features" class="nav-link hover:text-[#C9A227]">Features</a>
+                    <a href="#pricing" class="nav-link hover:text-[#C9A227]">Pricing</a>
+                    <a href="#faq" class="nav-link hover:text-[#C9A227]">FAQ</a>
+                    <a href="#download" class="px-6 py-2.5 rounded-3xl bg-[#0A2540] text-white font-semibold hover:bg-[#C9A227] transition">Download App</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn"
-                        class="md:hidden w-11 h-11 flex items-center justify-center text-[#0A2540]">
+                <button id="mobile-menu-btn" class="md:hidden w-11 h-11 flex items-center justify-center text-[#0A2540]">
                     <i class="fa-solid fa-bars text-2xl"></i>
                 </button>
             </div>
@@ -158,7 +71,6 @@
     <div id="mobile-menu" class="hidden md:hidden bg-white border-b">
         <div class="px-6 py-4 flex flex-col gap-y-3 text-sm font-medium">
             <a href="#features" class="py-2 nav-link">Features</a>
-            <a href="#how" class="py-2 nav-link">How it Works</a>
             <a href="#pricing" class="py-2 nav-link">Pricing</a>
             <a href="#faq" class="py-2 nav-link">FAQ</a>
             <a href="#download" class="mt-2 px-6 py-3 rounded-3xl bg-[#0A2540] text-white text-center font-semibold">Download App</a>
