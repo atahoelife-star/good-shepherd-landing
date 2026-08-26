@@ -50,6 +50,19 @@
         .testimonial-card {
             transition: all 0.3s ease;
         }
+
+        .gs-honeypot {
+            position: absolute;
+            left: -10000px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .gs-email-form {
+            position: relative;
+        }
         /* Force text to be visible */
         .testimonial-card p,
         .testimonial-card .font-semibold,
@@ -144,6 +157,26 @@
         <span>Download on the App Store</span>
     </a>
 </div>
+
+    <!-- Email capture (Hero, compact — desktop visitors who cannot install) -->
+    <form action="https://formsubmit.co/atahoelife@gmail.com" method="POST" class="gs-email-form mt-8 max-w-xl mx-auto">
+        <input type="hidden" name="_subject" value="Good Shepherd: send me the app">
+        <input type="hidden" name="_next" value="https://www.goodshepherdapp.org/#download">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="store_links" value="App Store: https://apps.apple.com/app/good-shepherd-app/id6789198742 — Google Play: https://play.google.com/store/apps/details?id=com.goodshepherd.app">
+        <input type="text" name="_honey" class="gs-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="flex flex-col sm:flex-row gap-3">
+            <label class="sr-only" for="hero-email">Email</label>
+            <input type="email" id="hero-email" name="email" required autocomplete="email"
+                   placeholder="Email me the download link"
+                   class="flex-1 px-5 py-3.5 rounded-3xl bg-white text-[#0A2540] placeholder:text-[#0A2540]/45 text-base outline-none ring-1 ring-white/40 focus:ring-2 focus:ring-[#C9A227]">
+            <button type="submit"
+                    class="px-7 py-3.5 rounded-3xl bg-[#C9A227] text-[#0A2540] font-semibold hover:bg-white transition shadow-lg">
+                Send the link
+            </button>
+        </div>
+        <p class="mt-3 text-xs text-white/70">We'll email the App Store and Google Play links. No spam.</p>
+    </form>
          
         </div>
     </div>
@@ -470,6 +503,28 @@
                 <span>Download on App Store</span>
             </a>
         </div>
+
+        <!-- Email capture (primary, desktop-friendly) -->
+        <form action="https://formsubmit.co/atahoelife@gmail.com" method="POST"
+              class="gs-email-form mt-10 max-w-xl mx-auto bg-[#FDF8F0] text-[#0A2540] rounded-3xl p-6 sm:p-8 text-left">
+            <input type="hidden" name="_subject" value="Good Shepherd: send me the app">
+            <input type="hidden" name="_next" value="https://www.goodshepherdapp.org/#download">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="store_links" value="App Store: https://apps.apple.com/app/good-shepherd-app/id6789198742 — Google Play: https://play.google.com/store/apps/details?id=com.goodshepherd.app">
+            <input type="text" name="_honey" class="gs-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="flex flex-col sm:flex-row gap-3">
+                <label class="sr-only" for="download-email">Email</label>
+                <input type="email" id="download-email" name="email" required autocomplete="email"
+                       placeholder="Email me the download link"
+                       class="flex-1 px-5 py-3.5 rounded-3xl bg-white text-[#0A2540] placeholder:text-[#0A2540]/45 text-base outline-none ring-1 ring-[#0A2540]/15 focus:ring-2 focus:ring-[#C9A227]">
+                <button type="submit"
+                        class="px-7 py-3.5 rounded-3xl bg-[#0A2540] text-white font-semibold hover:bg-[#C9A227] hover:text-[#0A2540] transition">
+                    Send the link
+                </button>
+            </div>
+            <p class="mt-3 text-xs text-[#0A2540]/60">We'll email the App Store and Google Play links. No spam.</p>
+        </form>
+
         <p class="mt-6 text-sm text-white/50">Available now on Google Play &amp; Apple App Store</p>
     </div>
 </section>
