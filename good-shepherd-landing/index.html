@@ -111,23 +111,37 @@
 
         .phone-bezel {
             position: relative;
-            background: #111318;
-            border-radius: 1.85rem;
-            padding: 0.38rem;
+            background: #0b0c0f;
+            border-radius: 2.15rem;
+            padding: 0.62rem 0.52rem;
             box-shadow:
-                0 0 0 1px rgba(255, 255, 255, 0.22),
-                0 18px 40px -10px rgba(0, 0, 0, 0.55);
+                0 0 0 2px #2a2d33,
+                0 22px 44px -14px rgba(0, 0, 0, 0.55);
+        }
+        .phone-bezel::before {
+            content: "";
+            position: absolute;
+            top: 11px;
+            left: 50%;
+            width: 28%;
+            height: 11px;
+            transform: translateX(-50%);
+            background: #050506;
+            border-radius: 999px;
+            z-index: 2;
+            pointer-events: none;
         }
         .phone-bezel img {
             display: block;
             width: 100%;
             height: auto;
-            border-radius: 1.5rem;
+            border-radius: 1.55rem;
         }
         .gallery-phone .phone-bezel {
+            padding: 0.72rem 0.58rem;
             box-shadow:
-                0 0 0 1px rgba(10, 37, 64, 0.12),
-                0 16px 32px -12px rgba(10, 37, 64, 0.28);
+                0 0 0 2px #1c1e22,
+                0 18px 36px -12px rgba(10, 37, 64, 0.38);
         }
 
         .gallery-scroll {
@@ -395,7 +409,7 @@
     </section>
 
     <!-- Screenshots / Preview -->
-    <section class="max-w-6xl mx-auto px-6 py-20" aria-labelledby="screenshots-heading">
+    <section id="screenshots" class="max-w-7xl mx-auto px-6 py-20" aria-labelledby="screenshots-heading">
         <div class="text-center mb-12">
             <h2 id="screenshots-heading" class="section-header mb-3">See it in action</h2>
             <p class="text-xl text-[#0A2540]/70">The Prayer Journal, Family Tree, and Bible — as they appear in the app.</p>
