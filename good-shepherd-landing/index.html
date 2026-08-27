@@ -20,6 +20,8 @@
     <meta name="twitter:title" content="Good Shepherd | Faith • Family • Legacy">
     <meta name="twitter:description" content="A calm, ad-free Christian app for Bible reading, prayer, and family legacy.">
     <meta name="twitter:image" content="https://www.goodshepherdapp.org/hero.jpg">
+    <link rel="preload" as="image" href="screens/hero.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="screens/family-tree.webp" fetchpriority="high">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -46,6 +48,11 @@
             font-weight: 700;
             letter-spacing: -0.03em;
             line-height: 1.15;
+        }
+        @media (max-width: 640px) {
+            .section-header {
+                font-size: 1.85rem;
+            }
         }
         .testimonial-card {
             transition: all 0.3s ease;
@@ -77,21 +84,111 @@
         #faq p {
             color: #0A2540 !important;
         }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "copy"
+                "phones"
+                "cta";
+            gap: 0.85rem 1.5rem;
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+                grid-template-areas:
+                    "copy phones"
+                    "cta phones";
+                gap: 1.25rem 2.5rem;
+                align-items: center;
+            }
+        }
+        .hero-copy { grid-area: copy; }
+        .hero-phones { grid-area: phones; }
+        .hero-cta { grid-area: cta; }
+
+        .phone-bezel {
+            position: relative;
+            background: #111318;
+            border-radius: 1.85rem;
+            padding: 0.38rem;
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.22),
+                0 18px 40px -10px rgba(0, 0, 0, 0.55);
+        }
+        .phone-bezel img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 1.5rem;
+        }
+        .gallery-phone .phone-bezel {
+            box-shadow:
+                0 0 0 1px rgba(10, 37, 64, 0.12),
+                0 16px 32px -12px rgba(10, 37, 64, 0.28);
+        }
+
+        .gallery-scroll {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 0.25rem 0.15rem 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        .gallery-scroll > figure {
+            scroll-snap-align: start;
+            flex: 0 0 210px;
+        }
+        @media (min-width: 768px) {
+            .gallery-scroll {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                overflow: visible;
+                gap: 1.75rem 1.5rem;
+                padding: 0;
+            }
+            .gallery-scroll > figure {
+                flex: none;
+                width: auto;
+                max-width: 260px;
+                margin: 0 auto;
+            }
+        }
+        @media (min-width: 1100px) {
+            .gallery-scroll {
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+            }
+            .gallery-scroll > figure {
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 640px) and (max-height: 740px) {
+            .hero-phone-primary {
+                width: 148px !important;
+            }
+            .hero-title {
+                font-size: 1.55rem !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-[#FDF8F0] text-[#0A2540]">
 
     <!-- Navbar -->
     <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-center h-20">
+        <div class="max-w-7xl mx-auto px-5 sm:px-6">
+            <div class="flex justify-between items-center h-14 md:h-20">
                 <!-- Logo -->
                 <div class="flex items-center gap-x-3">
-                    <div class="w-11 h-11 bg-[#0A2540] rounded-2xl flex items-center justify-center">
-                        <i class="fa-solid fa-book-open text-[#C9A227] text-3xl"></i>
+                    <div class="w-9 h-9 md:w-11 md:h-11 bg-[#0A2540] rounded-2xl flex items-center justify-center">
+                        <i class="fa-solid fa-book-open text-[#C9A227] text-xl md:text-3xl"></i>
                     </div>
                     <div>
-                        <span class="font-bold text-3xl tracking-tighter">Good Shepherd</span>
+                        <span class="font-bold text-xl md:text-3xl tracking-tighter">Good Shepherd</span>
                     </div>
                 </div>
 
@@ -104,7 +201,7 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden w-11 h-11 flex items-center justify-center text-[#0A2540]">
+                <button id="mobile-menu-btn" class="md:hidden w-11 h-11 flex items-center justify-center text-[#0A2540]" aria-label="Open menu">
                     <i class="fa-solid fa-bars text-2xl"></i>
                 </button>
             </div>
@@ -121,66 +218,92 @@
         </div>
     </div>
 
-   <!-- Hero Section -->
-<section class="relative min-h-[90vh] flex items-center justify-center text-white overflow-hidden">
-    <!-- Background Image -->
-    <img src="hero.jpg" alt="Good Shepherd at Dusk" 
-         class="absolute inset-0 w-full h-full object-cover">
-    
-    <!-- Dark overlay -->
-    <div class="absolute inset-0 bg-black/45"></div>
-    
-    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        <div class="max-w-3xl mx-auto pt-16 pb-20">
-            <h1 class="text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-6 heading-serif">
-                Root Your Family<br>in Faith
-            </h1>
-            
-            <p class="text-2xl text-white/90 max-w-2xl mx-auto mb-10">
-                Deepen your faith. Connect with family across generations.<br>
-                Build a legacy that lasts.
-            </p>
-            
-    <!-- Download Buttons (Hero) -->
-<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-    <a href="https://play.google.com/store/apps/details?id=com.goodshepherd.app" 
-       target="_blank" rel="noopener noreferrer"
-       class="inline-flex items-center bg-white hover:bg-gray-100 text-black px-8 py-4 rounded-2xl font-semibold text-lg transition transform hover:scale-105 shadow-lg">
-        <i class="fa-brands fa-google-play text-2xl mr-3"></i>
-        <span>Get it on Google Play</span>
-    </a>
-    
-    <a href="https://apps.apple.com/app/good-shepherd-app/id6789198742" 
-       target="_blank" rel="noopener noreferrer"
-       class="inline-flex items-center bg-black hover:bg-gray-900 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition transform hover:scale-105 shadow-lg">
-        <i class="fa-brands fa-apple text-3xl mr-3"></i>
-        <span>Download on the App Store</span>
-    </a>
-</div>
+    <!-- Hero Section -->
+    <section class="relative text-white overflow-hidden">
+        <img src="screens/hero.webp"
+             alt=""
+             width="1168"
+             height="784"
+             fetchpriority="high"
+             decoding="sync"
+             class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/72 via-black/55 to-black/40"></div>
 
-    <!-- Email capture (Hero, compact — desktop visitors who cannot install) -->
-    <form action="https://formsubmit.co/atahoelife@gmail.com" method="POST" class="gs-email-form mt-8 max-w-xl mx-auto">
-        <input type="hidden" name="_subject" value="Good Shepherd: send me the app">
-        <input type="hidden" name="_next" value="https://www.goodshepherdapp.org/#download">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="store_links" value="App Store: https://apps.apple.com/app/good-shepherd-app/id6789198742 — Google Play: https://play.google.com/store/apps/details?id=com.goodshepherd.app">
-        <input type="text" name="_honey" class="gs-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <div class="flex flex-col sm:flex-row gap-3">
-            <label class="sr-only" for="hero-email">Email</label>
-            <input type="email" id="hero-email" name="email" required autocomplete="email"
-                   placeholder="Email me the download link"
-                   class="flex-1 px-5 py-3.5 rounded-3xl bg-white text-[#0A2540] placeholder:text-[#0A2540]/45 text-base outline-none ring-1 ring-white/40 focus:ring-2 focus:ring-[#C9A227]">
-            <button type="submit"
-                    class="px-7 py-3.5 rounded-3xl bg-[#C9A227] text-[#0A2540] font-semibold hover:bg-white transition shadow-lg">
-                Send the link
-            </button>
+        <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 pt-5 pb-8 sm:pt-10 sm:pb-14 lg:pt-16 lg:pb-20">
+            <div class="hero-grid">
+                <div class="hero-copy text-center lg:text-left">
+                    <p class="inline-block px-3 py-1 rounded-full bg-white/15 text-[#F6E7B2] text-[11px] sm:text-xs font-semibold tracking-[0.14em] uppercase mb-3">
+                        Prayer Journal · Family Tree · Bible
+                    </p>
+                    <h1 class="hero-title text-[1.85rem] sm:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.08] mb-3 sm:mb-5 heading-serif">
+                        Root Your Family<br>in Faith
+                    </h1>
+                    <p class="hero-sub text-[0.95rem] sm:text-xl text-white/90 max-w-xl mx-auto lg:mx-0">
+                        A calm, ad-free home for prayer, journaling, and the family story you want to pass on.
+                    </p>
+                </div>
+
+                <div class="hero-phones flex justify-center items-end gap-3 sm:gap-4 min-h-0">
+                    <div class="hidden sm:block w-[148px] lg:w-[210px] -rotate-6 translate-y-4 lg:translate-y-8 shrink-0">
+                        <div class="phone-bezel">
+                            <img src="screens/prayer-request.webp"
+                                 alt="Good Shepherd New Prayer Request screen with family members you can link a prayer to"
+                                 width="840"
+                                 height="1818"
+                                 fetchpriority="high"
+                                 decoding="async">
+                        </div>
+                    </div>
+                    <div class="hero-phone-primary w-[168px] sm:w-[176px] lg:w-[250px] sm:rotate-3 shrink-0">
+                        <div class="phone-bezel">
+                            <img src="screens/family-tree.webp"
+                                 alt="Good Shepherd Family Tree showing Ethan, grandson, in the Legacy Prayer Tree"
+                                 width="900"
+                                 height="1948"
+                                 fetchpriority="high"
+                                 decoding="sync">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <div class="flex flex-row gap-2 sm:gap-4 justify-center lg:justify-start items-stretch">
+                        <a href="https://play.google.com/store/apps/details?id=com.goodshepherd.app"
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-flex flex-1 sm:flex-none items-center justify-center bg-white hover:bg-gray-100 text-black px-3 sm:px-7 py-2.5 sm:py-3.5 rounded-2xl font-semibold text-sm sm:text-lg transition shadow-lg">
+                            <i class="fa-brands fa-google-play text-lg sm:text-2xl mr-2 sm:mr-3"></i>
+                            <span><span class="sm:hidden">Google Play</span><span class="hidden sm:inline">Get it on Google Play</span></span>
+                        </a>
+                        <a href="https://apps.apple.com/app/good-shepherd-app/id6789198742"
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-flex flex-1 sm:flex-none items-center justify-center bg-black hover:bg-gray-900 text-white px-3 sm:px-7 py-2.5 sm:py-3.5 rounded-2xl font-semibold text-sm sm:text-lg transition shadow-lg ring-1 ring-white/25">
+                            <i class="fa-brands fa-apple text-xl sm:text-3xl mr-2 sm:mr-3"></i>
+                            <span><span class="sm:hidden">App Store</span><span class="hidden sm:inline">Download on the App Store</span></span>
+                        </a>
+                    </div>
+
+                    <form action="https://formsubmit.co/atahoelife@gmail.com" method="POST" class="gs-email-form mt-4 sm:mt-6 max-w-xl mx-auto lg:mx-0">
+                        <input type="hidden" name="_subject" value="Good Shepherd: send me the app">
+                        <input type="hidden" name="_next" value="https://www.goodshepherdapp.org/#download">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="store_links" value="App Store: https://apps.apple.com/app/good-shepherd-app/id6789198742 — Google Play: https://play.google.com/store/apps/details?id=com.goodshepherd.app">
+                        <input type="text" name="_honey" class="gs-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+                        <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                            <label class="sr-only" for="hero-email">Email</label>
+                            <input type="email" id="hero-email" name="email" required autocomplete="email"
+                                   placeholder="Email me the download link"
+                                   class="flex-1 px-4 sm:px-5 py-2.5 sm:py-3.5 rounded-3xl bg-white text-[#0A2540] placeholder:text-[#0A2540]/45 text-sm sm:text-base outline-none ring-1 ring-white/40 focus:ring-2 focus:ring-[#C9A227]">
+                            <button type="submit"
+                                    class="px-6 sm:px-7 py-2.5 sm:py-3.5 rounded-3xl bg-[#C9A227] text-[#0A2540] font-semibold hover:bg-white transition shadow-lg">
+                                Send the link
+                            </button>
+                        </div>
+                        <p class="mt-2 sm:mt-3 text-[11px] sm:text-xs text-white/70">We'll email the App Store and Google Play links. No spam.</p>
+                    </form>
+                </div>
+            </div>
         </div>
-        <p class="mt-3 text-xs text-white/70">We'll email the App Store and Google Play links. No spam.</p>
-    </form>
-         
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- Trust Bar -->
     <div class="bg-white border-y border-gray-200 py-5">
@@ -271,34 +394,90 @@
         </div>
     </section>
 
-   <!-- Screenshots / Preview -->
-<section class="max-w-6xl mx-auto px-6 py-20">
-    <div class="text-center mb-12">
-        <h2 class="section-header mb-3">See it in action</h2>
-        <p class="text-xl text-[#0A2540]/70">Clean, peaceful, and designed to fit naturally into your daily walk.</p>
-    </div>
-    
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-        <div class="aspect-[9/16] bg-gray-100 rounded-3xl overflow-hidden shadow-lg">
-            <img src="IMG_1644.png" alt="Good Shepherd Bible Reader" class="w-full h-full object-cover">
+    <!-- Screenshots / Preview -->
+    <section class="max-w-6xl mx-auto px-6 py-20" aria-labelledby="screenshots-heading">
+        <div class="text-center mb-12">
+            <h2 id="screenshots-heading" class="section-header mb-3">See it in action</h2>
+            <p class="text-xl text-[#0A2540]/70">The Prayer Journal, Family Tree, and Bible — as they appear in the app.</p>
         </div>
-        <div class="aspect-[9/16] bg-gray-100 rounded-3xl overflow-hidden shadow-lg">
-            <img src="IMG_1645.png" alt="Good Shepherd Family Tree" class="w-full h-full object-cover">
+
+        <div class="gallery-scroll">
+            <figure class="gallery-phone">
+                <div class="phone-bezel">
+                    <img src="screens/family-tree.webp"
+                         alt="Good Shepherd Family Tree showing Ethan, grandson, in the Legacy Prayer Tree"
+                         width="900"
+                         height="1948"
+                         loading="lazy"
+                         decoding="async">
+                </div>
+                <figcaption class="mt-4 text-center">
+                    <div class="font-semibold">Family Tree</div>
+                    <p class="text-sm text-[#0A2540]/65 mt-1">Names, relationships, and prayer notes across generations.</p>
+                </figcaption>
+            </figure>
+
+            <figure class="gallery-phone">
+                <div class="phone-bezel">
+                    <img src="screens/journal.webp"
+                         alt="Good Shepherd Prayer Journal home with today’s gratitude prompt"
+                         width="780"
+                         height="1688"
+                         loading="lazy"
+                         decoding="async">
+                </div>
+                <figcaption class="mt-4 text-center">
+                    <div class="font-semibold">Prayer Journal</div>
+                    <p class="text-sm text-[#0A2540]/65 mt-1">A quiet place to begin with a daily prompt.</p>
+                </figcaption>
+            </figure>
+
+            <figure class="gallery-phone">
+                <div class="phone-bezel">
+                    <img src="screens/prayer-request.webp"
+                         alt="Good Shepherd New Prayer Request screen with family members you can link a prayer to"
+                         width="840"
+                         height="1818"
+                         loading="lazy"
+                         decoding="async">
+                </div>
+                <figcaption class="mt-4 text-center">
+                    <div class="font-semibold">Prayer Requests</div>
+                    <p class="text-sm text-[#0A2540]/65 mt-1">Write a prayer and link it to people in your tree.</p>
+                </figcaption>
+            </figure>
+
+            <figure class="gallery-phone">
+                <div class="phone-bezel">
+                    <img src="screens/home.webp"
+                         alt="Good Shepherd home screen with a life verse from Philippians 4:13 and a Quick Prayer button"
+                         width="780"
+                         height="1688"
+                         loading="lazy"
+                         decoding="async">
+                </div>
+                <figcaption class="mt-4 text-center">
+                    <div class="font-semibold">Home</div>
+                    <p class="text-sm text-[#0A2540]/65 mt-1">Life verse, quick prayer, and today’s prompt in one place.</p>
+                </figcaption>
+            </figure>
+
+            <figure class="gallery-phone">
+                <div class="phone-bezel">
+                    <img src="screens/bible.webp"
+                         alt="Good Shepherd Bible screen showing John 3 and the Bible in a Year plan"
+                         width="780"
+                         height="1688"
+                         loading="lazy"
+                         decoding="async">
+                </div>
+                <figcaption class="mt-4 text-center">
+                    <div class="font-semibold">Bible</div>
+                    <p class="text-sm text-[#0A2540]/65 mt-1">Read Scripture with a year-long plan, available offline.</p>
+                </figcaption>
+            </figure>
         </div>
-        <div class="aspect-[9/16] bg-gray-100 rounded-3xl overflow-hidden shadow-lg">
-            <img src="IMG_1646.png" alt="Good Shepherd Prayer Journal" class="w-full h-full object-cover">
-        </div>
-        <div class="aspect-[9/16] bg-gray-100 rounded-3xl overflow-hidden shadow-lg">
-            <img src="IMG_1647.png" alt="Good Shepherd Legacy View" class="w-full h-full object-cover">
-        </div>
-        <div class="aspect-[9/16] bg-gray-100 rounded-3xl overflow-hidden shadow-lg">
-            <img src="IMG_1648.png" alt="Good Shepherd Screenshot 5" class="w-full h-full object-cover">
-        </div>
-        <div class="aspect-[9/16] bg-gray-100 rounded-3xl overflow-hidden shadow-lg">
-            <img src="IMG_1649.png" alt="Good Shepherd Screenshot 6" class="w-full h-full object-cover">
-        </div>
-    </div>
-</section>
+    </section>
 <!-- Testimonials -->
 <section class="max-w-5xl mx-auto px-6 pb-16">
     <div class="text-center mb-12">
@@ -555,11 +734,11 @@
         function initializeTailwind() {
             document.documentElement.style.setProperty('--accent-gold', '#C9A227');
         }
-        
+
         // Mobile menu toggle
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        
+
         if (mobileBtn && mobileMenu) {
             mobileBtn.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
@@ -569,7 +748,7 @@
                     icon.classList.toggle('fa-times');
                 }
             });
-            
+
             // Close mobile menu when clicking a link
             mobileMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
@@ -596,7 +775,7 @@
 
         // Initialize everything
         initializeTailwind();
-        
+
         // If #download is missing we should never silently swallow those clicks.
     </script>
 </body>
